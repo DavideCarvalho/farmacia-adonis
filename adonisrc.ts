@@ -30,6 +30,7 @@ export default defineConfig({
     () => import('@adonisjs/lucid/commands'),
     () => import('@tuyau/core/commands'),
     () => import('adonis-sail/commands'),
+    () => import('@acidiney/bull-queue/commands')
   ],
 
   /*
@@ -61,6 +62,7 @@ export default defineConfig({
     () => import('@tuyau/core/tuyau_provider'),
     () => import('@adonisjs/redis/redis_provider'),
     () => import('@adonisjs/limiter/limiter_provider'),
+    () => import('@acidiney/bull-queue/queue_provider')
   ],
 
   /*
