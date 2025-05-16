@@ -26,4 +26,4 @@ WORKDIR /app
 COPY --from=production-deps /app/node_modules /app/node_modules
 COPY --from=build /app/build /app
 EXPOSE 9999
-CMD ["node", "ace", "queue:listen", "&", "node", "ace", "queue:listen:ui"]
+CMD ["node", "ace", "queue:listen:ui"]
