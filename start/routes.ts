@@ -35,7 +35,7 @@ router
   .as('forgotPassword')
 
 router.group(() => {
-  router.on('/dashboard').renderInertia('dashboard')
+  router.on('/dashboard').renderInertia('dashboard').title('Dashboard')
 })
 
 router.get('/health', [HealthChecksController])

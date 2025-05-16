@@ -68,6 +68,7 @@ export default defineConfig({
       file: () => import('adonisjs-scheduler/scheduler_provider'),
       environment: ['console'],
     },
+    () => import('@artian-techs/adonis-breadcrumbs/breadcrumbs_provider')
   ],
 
   /*
