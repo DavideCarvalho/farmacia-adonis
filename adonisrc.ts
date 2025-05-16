@@ -30,7 +30,8 @@ export default defineConfig({
     () => import('@adonisjs/lucid/commands'),
     () => import('@tuyau/core/commands'),
     () => import('adonis-sail/commands'),
-    () => import('@acidiney/bull-queue/commands')
+    () => import('@acidiney/bull-queue/commands'),
+    () => import('adonisjs-scheduler/commands'),
   ],
 
   /*
@@ -62,7 +63,11 @@ export default defineConfig({
     () => import('@tuyau/core/tuyau_provider'),
     () => import('@adonisjs/redis/redis_provider'),
     () => import('@adonisjs/limiter/limiter_provider'),
-    () => import('@acidiney/bull-queue/queue_provider')
+    () => import('@acidiney/bull-queue/queue_provider'),
+    {
+      file: () => import('adonisjs-scheduler/scheduler_provider'),
+      environment: ['console'],
+    },
   ],
 
   /*
@@ -73,7 +78,14 @@ export default defineConfig({
   | List of modules to import before starting the application.
   |
   */
-  preloads: [() => import('#start/routes'), () => import('#start/kernel')],
+  preloads: [
+    () => import('#start/routes'),
+    () => import('#start/kernel'),
+    {
+      file: () => import('#start/scheduler'),
+      environment: ['console'],
+    },
+  ],
 
   /*
   |--------------------------------------------------------------------------
