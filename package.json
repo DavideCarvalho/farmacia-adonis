@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node bin/server.js",
     "build": "node ace build",
-    "dev": "concurrently \"node ace serve --hmr\" \"node ace queue:listen\" \"node ace queue:listen:ui\"",
+    "dev": "concurrently \"node ace serve --hmr\" \"node ace queue:listen:ui\"",
     "test": "node ace test",
     "lint": "eslint .",
     "format": "prettier --write .",
