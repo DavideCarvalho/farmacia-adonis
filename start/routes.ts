@@ -1,3 +1,5 @@
+const HealthChecksController = () => import('#controllers/health_checks_controller')
+
 /*
 |--------------------------------------------------------------------------
 | Routes file
@@ -9,3 +11,5 @@
 
 import router from '@adonisjs/core/services/router'
 router.on('/').renderInertia('home')
+
+router.get('/health', [HealthChecksController])
