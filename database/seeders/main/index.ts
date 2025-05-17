@@ -1,8 +1,8 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
-import DepartmentSeeder from './department_seeder.js'
-import SupplierSeeder from './supplier_seeder.js'
-import MedicationSeeder from './medication_seeder.js'
-import UserSeeder from './user_seeder.js'
+import DepartmentSeeder from '../department_seeder.js'
+import SupplierSeeder from '../supplier_seeder.js'
+import MedicationSeeder from '../medication_seeder.js'
+import UserSeeder from '../user_seeder.js'
 
 export default class extends BaseSeeder {
   async run() {

@@ -8,7 +8,7 @@ export default class extends BaseSeeder {
       {
         id: v7(),
         name: 'Medicamentos SA',
-        cnpj: '12345678901234',
+        cnpj: '12345678000190',
         email: 'contato@medicamentossa.com.br',
         phone: '(11) 1234-5678',
         address: 'Av. Paulista, 1000 - São Paulo/SP',
@@ -17,7 +17,7 @@ export default class extends BaseSeeder {
       {
         id: v7(),
         name: 'Farma Distribuidora',
-        cnpj: '98765432109876',
+        cnpj: '98765432000110',
         email: 'vendas@farmadistribuidora.com.br',
         phone: '(11) 9876-5432',
         address: 'Rua Augusta, 500 - São Paulo/SP',
@@ -26,7 +26,7 @@ export default class extends BaseSeeder {
       {
         id: v7(),
         name: 'Medicamentos Express',
-        cnpj: '45678901234567',
+        cnpj: '45678901000123',
         email: 'atendimento@medicamentosexpress.com.br',
         phone: '(11) 4567-8901',
         address: 'Av. Rebouças, 2000 - São Paulo/SP',

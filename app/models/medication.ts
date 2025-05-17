@@ -8,15 +8,16 @@ import MedicationRequestItem from './medication_request_item.js'
 import BaseUUIDModel from './utils/base_uuid_model.js'
 
 export enum MedicationForm {
-  TABLET = 'TABLET',
-  CAPSULE = 'CAPSULE',
-  LIQUID = 'LIQUID',
-  INJECTION = 'INJECTION',
-  CREAM = 'CREAM',
-  OINTMENT = 'OINTMENT',
-  POWDER = 'POWDER',
-  SPRAY = 'SPRAY',
-  OTHER = 'OTHER',
+  COMPRIMIDO = 'COMPRIMIDO',
+  CAPSULA = 'CAPSULA',
+  LIQUIDO = 'LIQUIDO',
+  INJETAVEL = 'INJETAVEL',
+  POMADA = 'POMADA',
+  CREME = 'CREME',
+  GEL = 'GEL',
+  AEROSOL = 'AEROSOL',
+  ADESIVO = 'ADESIVO',
+  OUTRO = 'OUTRO',
 }
 
 export default class Medication extends BaseUUIDModel {
