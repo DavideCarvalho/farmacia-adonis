@@ -1,5 +1,5 @@
 import { BaseModelDto } from '@adocasts.com/dto/base'
-import User from '#models/user'
+import User, { UserRole } from '#models/user'
 import DepartmentDto from '#dtos/department'
 import ActivityDto from '#dtos/activity'
 import MedicationRequestDto from '#dtos/medication_request'
@@ -45,6 +45,5 @@ export default class UserDto extends BaseModelDto {
     this.approvedRequests = MedicationRequestDto.fromArray(user.approvedRequests)
     this.dispensations = DispensationDto.fromArray(user.dispensations)
     this.stockMovements = StockMovementDto.fromArray(user.stockMovements)
-    this.static beforeCreatemodel = user.static beforeCreatemodel
   }
 }

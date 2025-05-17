@@ -4,12 +4,12 @@ import MedicationRequestDto from '#dtos/medication_request'
 import MedicationDto from '#dtos/medication'
 
 export default class MedicationRequestItemDto extends BaseModelDto {
-  declare requestId!: string
-  declare medicationId!: string
-  declare quantity!: number
-  declare notes!: string | null
-  declare request!: MedicationRequestDto | null
-  declare medication!: MedicationDto | null
+  declare requestId: string
+  declare medicationId: string
+  declare quantity: number
+  declare notes: string | null
+  declare request: MedicationRequestDto | null
+  declare medication: MedicationDto | null
 
   constructor(medicationRequestItem?: MedicationRequestItem) {
     super()
@@ -19,7 +19,9 @@ export default class MedicationRequestItemDto extends BaseModelDto {
     this.medicationId! = medicationRequestItem.medicationId!
     this.quantity! = medicationRequestItem.quantity!
     this.notes! = medicationRequestItem.notes!
-    this.request! = medicationRequestItem.request! && new MedicationRequestDto(medicationRequestItem.request!)
-    this.medication! = medicationRequestItem.medication! && new MedicationDto(medicationRequestItem.medication!)
+    this.request! =
+      medicationRequestItem.request! && new MedicationRequestDto(medicationRequestItem.request!)
+    this.medication! =
+      medicationRequestItem.medication! && new MedicationDto(medicationRequestItem.medication!)
   }
 }

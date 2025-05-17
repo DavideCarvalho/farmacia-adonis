@@ -5,16 +5,16 @@ import SupplierDto from '#dtos/supplier'
 import StockItemDto from '#dtos/stock_item'
 
 export default class BatchDto extends BaseModelDto {
-  declare number!: string
-  declare medicationId!: string
-  declare supplierId!: string
-  declare manufacturingDate!: string | null
-  declare expirationDate!: string
-  declare quantity!: number
-  declare purchasePrice!: number
-  declare medication!: MedicationDto | null
-  declare supplier!: SupplierDto | null
-  declare stockItems!: StockItemDto[]
+  declare number: string
+  declare medicationId: string
+  declare supplierId: string
+  declare manufacturingDate: string | null
+  declare expirationDate: string
+  declare quantity: number
+  declare purchasePrice: number
+  declare medication: MedicationDto | null
+  declare supplier: SupplierDto | null
+  declare stockItems: StockItemDto[]
 
   constructor(batch?: Batch) {
     super()

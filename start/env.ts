@@ -45,5 +45,5 @@ export default await Env.create(new URL('../', import.meta.url), {
   | Variables for configuring the limiter package
   |----------------------------------------------------------
   */
-  LIMITER_STORE: Env.schema.enum(['redis', 'memory'] as const)
+  LIMITER_STORE: Env.schema.enum(['redis', 'memory'] as const),
 })

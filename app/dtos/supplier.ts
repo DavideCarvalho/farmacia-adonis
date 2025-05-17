@@ -3,13 +3,13 @@ import Supplier from '#models/supplier'
 import BatchDto from '#dtos/batch'
 
 export default class SupplierDto extends BaseModelDto {
-  declare name!: string
-  declare cnpj!: string
-  declare email!: string | null
-  declare phone!: string | null
-  declare address!: string | null
-  declare contact!: string | null
-  declare batches!: BatchDto[]
+  declare name: string
+  declare cnpj: string
+  declare email: string | null
+  declare phone: string | null
+  declare address: string | null
+  declare contact: string | null
+  declare batches: BatchDto[]
 
   constructor(supplier?: Supplier) {
     super()

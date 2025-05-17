@@ -1,26 +1,26 @@
 import { BaseModelDto } from '@adocasts.com/dto/base'
-import Medication from '#models/medication'
+import Medication, { MedicationForm } from '#models/medication'
 import BatchDto from '#dtos/batch'
 import StockItemDto from '#dtos/stock_item'
 import DispensationItemDto from '#dtos/dispensation_item'
 import MedicationRequestItemDto from '#dtos/medication_request_item'
 
 export default class MedicationDto extends BaseModelDto {
-  declare name!: string
-  declare genericName!: string | null
-  declare description!: string | null
-  declare dosage!: string
-  declare form!: MedicationForm
-  declare category!: string | null
-  declare minStock!: number
-  declare maxStock!: number | null
-  declare controlled!: boolean
-  declare refrigerated!: boolean
-  declare barcode!: string | null
-  declare batches!: BatchDto[]
-  declare stockItems!: StockItemDto[]
-  declare dispensationItems!: DispensationItemDto[]
-  declare requestItems!: MedicationRequestItemDto[]
+  declare name: string
+  declare genericName: string | null
+  declare description: string | null
+  declare dosage: string
+  declare form: MedicationForm
+  declare category: string | null
+  declare minStock: number
+  declare maxStock: number | null
+  declare controlled: boolean
+  declare refrigerated: boolean
+  declare barcode: string | null
+  declare batches: BatchDto[]
+  declare stockItems: StockItemDto[]
+  declare dispensationItems: DispensationItemDto[]
+  declare requestItems: MedicationRequestItemDto[]
 
   constructor(medication?: Medication) {
     super()

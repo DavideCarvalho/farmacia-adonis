@@ -9,5 +9,5 @@ export default defineConfig({
    *
    * @default null
    */
-  prefix: null
+  prefix: null,
 })

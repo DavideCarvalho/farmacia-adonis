@@ -6,14 +6,14 @@ import StockMovementDto from '#dtos/stock_movement'
 import DispensationItemDto from '#dtos/dispensation_item'
 
 export default class StockItemDto extends BaseModelDto {
-  declare medicationId!: string
-  declare batchId!: string
-  declare currentQuantity!: number
-  declare location!: string | null
-  declare medication!: MedicationDto | null
-  declare batch!: BatchDto | null
-  declare stockMovements!: StockMovementDto[]
-  declare dispensationItems!: DispensationItemDto[]
+  declare medicationId: string
+  declare batchId: string
+  declare currentQuantity: number
+  declare location: string | null
+  declare medication: MedicationDto | null
+  declare batch: BatchDto | null
+  declare stockMovements: StockMovementDto[]
+  declare dispensationItems: DispensationItemDto[]
 
   constructor(stockItem?: StockItem) {
     super()
