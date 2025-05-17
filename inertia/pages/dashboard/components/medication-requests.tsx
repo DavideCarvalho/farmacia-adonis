@@ -7,10 +7,9 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useToast } from "@/hooks/use-toast"
+import { toast } from "react-hot-toast"
 
 export function MedicationRequests() {
-  const { toast } = useToast()
   const [requests, setRequests] = useState([
     {
       id: 1,
@@ -61,19 +60,12 @@ export function MedicationRequests() {
 
   const handleApprove = (id: number) => {
     setRequests(requests.map((request) => (request.id === id ? { ...request, status: "approved" } : request)))
-    toast({
-      title: "Solicitação aprovada",
-      description: "A solicitação foi aprovada com sucesso.",
-    })
+    toast.success("Solicitação aprovada")
   }
 
   const handleReject = (id: number) => {
     setRequests(requests.map((request) => (request.id === id ? { ...request, status: "rejected" } : request)))
-    toast({
-      title: "Solicitação rejeitada",
-      description: "A solicitação foi rejeitada.",
-      variant: "destructive",
-    })
+    toast.error("Solicitação rejeitada")
   }
 
   const pendingRequests = requests.filter((request) => request.status === "pending")

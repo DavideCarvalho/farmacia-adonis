@@ -5,6 +5,9 @@ import '../css/app.css'
 import { hydrateRoot } from 'react-dom/client'
 import { createInertiaApp } from '@inertiajs/react'
 import { resolvePageComponent } from '@adonisjs/inertia/helpers'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClient } from '~/utils/query_client'
+import { Toaster } from 'react-hot-toast'
 
 const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
 
@@ -18,6 +21,12 @@ createInertiaApp({
   },
 
   setup({ el, App, props }) {
-    hydrateRoot(el, <App {...props} />)
+    hydrateRoot(
+      el,
+      <QueryClientProvider client={queryClient}>
+        <Toaster />
+        <App {...props} />
+      </QueryClientProvider>
+    )
   },
 })

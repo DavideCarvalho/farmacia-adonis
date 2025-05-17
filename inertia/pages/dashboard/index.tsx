@@ -1,23 +1,19 @@
-import type { Metadata } from "next"
-
-import { DashboardHeader } from "@/components/dashboard/dashboard-header"
-import { DashboardShell } from "@/components/dashboard/dashboard-shell"
-import { DashboardStats } from "@/components/dashboard/dashboard-stats"
-import { MedicationAlerts } from "@/components/dashboard/medication-alerts"
-import { MedicationRequests } from "@/components/dashboard/medication-requests"
-import { RecentActivity } from "@/components/dashboard/recent-activity"
-import { StockChart } from "@/components/dashboard/stock-chart"
-import { TopMedications } from "@/components/dashboard/top-medications"
-
-export const metadata: Metadata = {
-  title: "Dashboard - Sistema de Controle de Farmácia Hospitalar",
-  description: "Dashboard do sistema de controle de farmácia hospitalar",
-}
+import { DashboardHeader } from '~/pages/dashboard/components/dashboard-header'
+import { DashboardShell } from '~/layout/dashboard-layout'
+import { DashboardStats } from '~/pages/dashboard/components/dashboard-stats'
+import { MedicationAlerts } from '~/pages/dashboard/components/medication-alerts'
+import { MedicationRequests } from '~/pages/dashboard/components/medication-requests'
+import { RecentActivity } from '~/pages/dashboard/components/recent-activity'
+import { StockChart } from '~/pages/dashboard/components/stock-chart'
+import { TopMedications } from '~/pages/dashboard/components/top-medications'
 
 export default function DashboardPage() {
   return (
-    <DashboardShell>
-      <DashboardHeader heading="Dashboard" text="Bem-vindo ao Sistema de Controle de Farmácia Hospitalar" />
+    <>
+      <DashboardHeader
+        heading="Dashboard"
+        text="Bem-vindo ao Sistema de Controle de Farmácia Hospitalar"
+      />
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <DashboardStats />
       </div>
@@ -40,6 +36,8 @@ export default function DashboardPage() {
       <div className="grid gap-4">
         <RecentActivity />
       </div>
-    </DashboardShell>
+    </>
   )
 }
+
+DashboardPage.layout = (page: React.ReactNode) => <DashboardShell>{page}</DashboardShell>
