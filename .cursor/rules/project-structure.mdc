@@ -1,0 +1,30 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Project Structure Guide
+
+This is an AdonisJS application with TypeScript, Inertia.js, and Tailwind CSS. Here's the main structure:
+
+- `app/` - Core application code
+  - `controllers/` - Request handlers and business logic
+  - `models/` - Database models
+  - `middleware/` - Request middleware
+  - `validators/` - Request validation rules
+  - `exceptions/` - Custom exception handlers
+  - `jobs/` - Background job definitions
+
+- `resources/` - Frontend assets and views
+  - `views/` - Inertia.js views and components
+
+- `config/` - Application configuration files
+- `database/` - Database migrations and seeders
+- `start/` - Application startup files
+- `tests/` - Test files
+
+Key configuration files:
+- [adonisrc.ts](mdc:adonisrc.ts) - AdonisJS configuration
+- [tsconfig.json](mdc:tsconfig.json) - TypeScript configuration
+- [tailwind.config.js](mdc:tailwind.config.js) - Tailwind CSS configuration
+- [vite.config.ts](mdc:vite.config.ts) - Vite bundler configuration

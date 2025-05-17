@@ -1,0 +1,76 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Frontend Architecture
+
+This project uses Inertia.js with TypeScript and Tailwind CSS for the frontend.
+
+## Key Technologies
+
+- [Inertia.js](mdc:https:/inertiajs.com) - Server-side routing with client-side rendering
+- [Tailwind CSS](mdc:https:/tailwindcss.com) - Utility-first CSS framework
+- [TypeScript](mdc:https:/www.typescriptlang.org) - Type-safe JavaScript
+
+## Directory Structure
+
+- `resources/views/` - Inertia.js views
+  - `layouts/` - Page layouts
+  - `components/` - Reusable components
+  - `pages/` - Page components
+
+## Best Practices
+
+1. **Component Organization**
+   - Keep components small and focused
+   - Use TypeScript interfaces for props
+   - Follow the single responsibility principle
+
+2. **Styling**
+   - Use Tailwind utility classes
+   - Create custom components for repeated patterns
+   - Follow mobile-first responsive design
+
+3. **State Management**
+   - Use Inertia's built-in state management
+   - Keep state as local as possible
+   - Use props for component communication
+
+4. **Type Safety**
+   - Define interfaces for all props
+   - Use TypeScript's strict mode
+   - Avoid using `any` type
+
+## Common Patterns
+
+1. **Page Components**
+```typescript
+interface Props {
+  title: string;
+  data: SomeDataType;
+}
+
+const Page: React.FC<Props> = ({ title, data }) => {
+  return (
+    <Layout title={title}>
+      {/* Page content */}
+    </Layout>
+  );
+};
+```
+
+2. **Form Handling**
+```typescript
+import { useForm } from '@inertiajs/react';
+
+const form = useForm({
+  name: '',
+  email: '',
+});
+
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+  form.post('/users');
+};
+```

@@ -1,0 +1,48 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Development Workflow
+
+## Getting Started
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Set up environment:
+```bash
+cp .env.example .env
+```
+
+3. Start the development server:
+```bash
+node ace serve --watch
+```
+
+## Common Commands
+
+- `node ace make:controller` - Create a new controller
+- `node ace make:model` - Create a new model
+- `node ace make:migration` - Create a new migration
+- `node ace migration:run` - Run pending migrations
+- `node ace migration:rollback` - Rollback the last migration
+- `node ace test` - Run tests
+
+## Docker Development
+
+The project includes Docker configuration for development:
+
+- `docker compose up` - Start all services
+- `docker compose up -d` - Start services in detached mode
+- `docker compose down` - Stop all services
+
+## Code Style
+
+- Follow TypeScript best practices
+- Use ESLint for code linting
+- Follow AdonisJS conventions for file organization
+- Use Tailwind CSS for styling
+- Write tests for new features
