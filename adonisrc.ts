@@ -32,6 +32,7 @@ export default defineConfig({
     () => import('adonis-sail/commands'),
     () => import('@acidiney/bull-queue/commands'),
     () => import('adonisjs-scheduler/commands'),
+    () => import('@adocasts.com/dto/commands')
   ],
 
   /*
