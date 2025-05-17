@@ -1,9 +1,10 @@
 @import 'tailwindcss';
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 @source "../views";
+@source "../../inertia";
+
+@custom-variant dark (&:is(.dark *));
 
 @config "../../tailwind.config.js";
 

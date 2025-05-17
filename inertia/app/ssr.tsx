@@ -1,4 +1,3 @@
-import '../css/app.css'
 import ReactDOMServer from 'react-dom/server'
 import { createInertiaApp } from '@inertiajs/react'
 import { queryClient } from '~/utils/query_client'
