@@ -1,4 +1,3 @@
-import type { DateTime } from 'luxon'
 import { column, belongsTo } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import User from './user.js'
