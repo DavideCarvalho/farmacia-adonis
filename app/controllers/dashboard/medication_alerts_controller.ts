@@ -1,6 +1,5 @@
 import { HttpContext } from '@adonisjs/core/http'
 import StockItem from '#models/stock_item'
-import Medication from '#models/medication'
 import Batch from '#models/batch'
 
 export default class MedicationAlertsController {
