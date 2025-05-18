@@ -1,76 +1,109 @@
-import { AlertTriangle, Clock } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Suspense } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
+import { tuyau } from '~/api/utils/tuyau_client'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { AlertCircle, Clock } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
 
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+type Alert = {
+  id: string
+  medication: string
+  type: 'low_stock' | 'expiring'
+  message: string
+  createdAt: string
+}
 
-export function MedicationAlerts() {
-  const alerts = [
-    {
-      id: 1,
-      name: "Dipirona 500mg",
-      type: "estoque",
-      message: "Estoque abaixo do mínimo (15 unidades)",
-      severity: "high",
-    },
-    {
-      id: 2,
-      name: "Amoxicilina 500mg",
-      type: "validade",
-      message: "Vencimento em 15 dias",
-      severity: "medium",
-    },
-    {
-      id: 3,
-      name: "Paracetamol 750mg",
-      type: "estoque",
-      message: "Estoque abaixo do mínimo (20 unidades)",
-      severity: "high",
-    },
-    {
-      id: 4,
-      name: "Omeprazol 20mg",
-      type: "validade",
-      message: "Vencimento em 30 dias",
-      severity: "low",
-    },
-    {
-      id: 5,
-      name: "Insulina Regular",
-      type: "temperatura",
-      message: "Temperatura acima do ideal",
-      severity: "high",
-    },
-  ]
+function MedicationAlertsContent() {
+  const { data } = useSuspenseQuery({
+    queryKey: ['medication-alerts'],
+    queryFn: () => tuyau.api.dashboard['medication-alerts'].$get()
+  })
+
+  const alerts = data.data?.alerts as Alert[]
 
   return (
-    <Card className="h-full">
-      <CardHeader className="pb-3">
-        <div className="flex items-center justify-between">
-          <CardTitle>Alertas</CardTitle>
-          <AlertTriangle className="h-4 w-4 text-amber-500" />
-        </div>
-        <CardDescription>Medicamentos que requerem atenção imediata</CardDescription>
+    <Card>
+      <CardHeader>
+        <CardTitle>Alertas de Medicamentos</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
-        {alerts.map((alert) => (
-          <div key={alert.id} className="flex items-center justify-between space-x-4 rounded-md border p-3">
-            <div className="space-y-1">
-              <p className="font-medium leading-none">{alert.name}</p>
-              <p className="text-sm text-muted-foreground">{alert.message}</p>
+      <CardContent>
+        <div className="space-y-4">
+          {alerts?.map((alert) => (
+            <div key={alert.id} className="flex items-start space-x-4">
+              <div className="mt-1">
+                {alert.type === 'low_stock' ? (
+                  <AlertCircle className="h-5 w-5 text-red-500" />
+                ) : (
+                  <Clock className="h-5 w-5 text-yellow-500" />
+                )}
+              </div>
+              <div className="flex-1 space-y-1">
+                <p className="text-sm font-medium leading-none">{alert.medication}</p>
+                <p className="text-sm text-muted-foreground">{alert.message}</p>
+                <div className="flex items-center space-x-2">
+                  <Badge variant={alert.type === 'low_stock' ? 'destructive' : 'warning'}>
+                    {alert.type === 'low_stock' ? 'Estoque Baixo' : 'Próximo do Vencimento'}
+                  </Badge>
+                  <span className="text-xs text-muted-foreground">
+                    {new Date(alert.createdAt).toLocaleDateString('pt-BR')}
+                  </span>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Badge
-                variant={
-                  alert.severity === "high" ? "destructive" : alert.severity === "medium" ? "default" : "outline"
-                }
-              >
-                {alert.severity === "high" ? "Crítico" : alert.severity === "medium" ? "Médio" : "Baixo"}
-              </Badge>
-              {alert.type === "validade" && <Clock className="h-4 w-4 text-muted-foreground" />}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </CardContent>
     </Card>
+  )
+}
+
+function ErrorFallback() {
+  return (
+    <Card className="border-destructive">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 text-destructive">
+          <AlertCircle className="h-5 w-5" />
+          Erro ao carregar alertas
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm text-muted-foreground">
+          Não foi possível carregar os alertas de medicamentos. Por favor, tente novamente mais tarde.
+        </p>
+      </CardContent>
+    </Card>
+  )
+}
+
+export function MedicationAlerts() {
+  return (
+    <ErrorBoundary fallbackRender={ErrorFallback}>
+      <Suspense fallback={
+        <Card>
+          <CardHeader>
+            <CardTitle>Alertas de Medicamentos</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="flex items-start space-x-4">
+                  <div className="mt-1">
+                    <div className="h-5 w-5 animate-pulse rounded-full bg-muted" />
+                  </div>
+                  <div className="flex-1 space-y-2">
+                    <div className="h-4 w-32 animate-pulse rounded bg-muted" />
+                    <div className="h-3 w-48 animate-pulse rounded bg-muted" />
+                    <div className="h-3 w-24 animate-pulse rounded bg-muted" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      }>
+        <MedicationAlertsContent />
+      </Suspense>
+    </ErrorBoundary>
   )
 }

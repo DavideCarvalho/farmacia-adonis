@@ -19,6 +19,30 @@ type ApiUsersPost = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/user.ts')['createUserValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/users_controller.ts').default['createUser'], true>
 }
+type ApiDashboardStatsGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/dashboard/stats_controller.ts').default['handle'], false>
+}
+type ApiDashboardStockchartGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/dashboard/stock_chart_controller.ts').default['handle'], false>
+}
+type ApiDashboardMedicationalertsGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/dashboard/medication_alerts_controller.ts').default['handle'], false>
+}
+type ApiDashboardMedicationrequestsGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/dashboard/medication_requests_controller.ts').default['handle'], false>
+}
+type ApiDashboardTopmedicationsGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/dashboard/top_medications_controller.ts').default['handle'], false>
+}
+type ApiDashboardRecentactivityGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/dashboard/recent_activity_controller.ts').default['handle'], false>
+}
 type HealthGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/health_checks_controller.ts').default['handle'], false>
@@ -39,6 +63,44 @@ export interface ApiDefinition {
       '$url': {
       };
       '$post': ApiUsersPost;
+    };
+    'dashboard': {
+      'stats': {
+        '$url': {
+        };
+        '$get': ApiDashboardStatsGetHead;
+        '$head': ApiDashboardStatsGetHead;
+      };
+      'stock-chart': {
+        '$url': {
+        };
+        '$get': ApiDashboardStockchartGetHead;
+        '$head': ApiDashboardStockchartGetHead;
+      };
+      'medication-alerts': {
+        '$url': {
+        };
+        '$get': ApiDashboardMedicationalertsGetHead;
+        '$head': ApiDashboardMedicationalertsGetHead;
+      };
+      'medication-requests': {
+        '$url': {
+        };
+        '$get': ApiDashboardMedicationrequestsGetHead;
+        '$head': ApiDashboardMedicationrequestsGetHead;
+      };
+      'top-medications': {
+        '$url': {
+        };
+        '$get': ApiDashboardTopmedicationsGetHead;
+        '$head': ApiDashboardTopmedicationsGetHead;
+      };
+      'recent-activity': {
+        '$url': {
+        };
+        '$get': ApiDashboardRecentactivityGetHead;
+        '$head': ApiDashboardRecentactivityGetHead;
+      };
     };
   };
   'health': {
@@ -69,6 +131,48 @@ const routes = [
     path: '/api/users',
     method: ["POST"],
     types: {} as ApiUsersPost,
+  },
+  {
+    params: [],
+    name: 'api.dashboard.stats',
+    path: '/api/dashboard/stats',
+    method: ["GET","HEAD"],
+    types: {} as ApiDashboardStatsGetHead,
+  },
+  {
+    params: [],
+    name: 'api.dashboard.stockChart',
+    path: '/api/dashboard/stock-chart',
+    method: ["GET","HEAD"],
+    types: {} as ApiDashboardStockchartGetHead,
+  },
+  {
+    params: [],
+    name: 'api.dashboard.medicationAlerts',
+    path: '/api/dashboard/medication-alerts',
+    method: ["GET","HEAD"],
+    types: {} as ApiDashboardMedicationalertsGetHead,
+  },
+  {
+    params: [],
+    name: 'api.dashboard.medicationRequests',
+    path: '/api/dashboard/medication-requests',
+    method: ["GET","HEAD"],
+    types: {} as ApiDashboardMedicationrequestsGetHead,
+  },
+  {
+    params: [],
+    name: 'api.dashboard.topMedications',
+    path: '/api/dashboard/top-medications',
+    method: ["GET","HEAD"],
+    types: {} as ApiDashboardTopmedicationsGetHead,
+  },
+  {
+    params: [],
+    name: 'api.dashboard.recentActivity',
+    path: '/api/dashboard/recent-activity',
+    method: ["GET","HEAD"],
+    types: {} as ApiDashboardRecentactivityGetHead,
   },
   {
     params: [],
