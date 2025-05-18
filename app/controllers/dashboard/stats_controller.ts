@@ -24,4 +24,4 @@ export default class StatsController {
       totalSales: 0, // TODO: Implement sales tracking
     })
   }
-} 
+}

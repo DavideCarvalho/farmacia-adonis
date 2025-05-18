@@ -13,10 +13,12 @@ export default class StockChartController {
       .orderBy('month', 'desc')
       .limit(6)
 
-    const labels = lastSixMonths.map((item) => {
-      const date = new Date(item.month)
-      return date.toLocaleString('pt-BR', { month: 'short' })
-    }).reverse()
+    const labels = lastSixMonths
+      .map((item) => {
+        const date = new Date(item.month)
+        return date.toLocaleString('pt-BR', { month: 'short' })
+      })
+      .reverse()
 
     const data = lastSixMonths.map((item) => Number(item.total_quantity)).reverse()
 
@@ -30,4 +32,4 @@ export default class StockChartController {
       ],
     })
   }
-} 
+}
