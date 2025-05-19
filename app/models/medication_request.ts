@@ -1,10 +1,10 @@
 import { column, belongsTo, hasMany } from '@adonisjs/lucid/orm'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
-import Department from './department.js'
-import User from './user.js'
-import MedicationRequestItem from './medication_request_item.js'
-import Dispensation from './dispensation.js'
-import BaseUUIDModel from './base_uuid_model.js'
+import Department from '#models/department'
+import User from '#models/user'
+import MedicationRequestItem from '#models/medication_request_item'
+import Dispensation from '#models/dispensation'
+import BaseUUIDModel from '#models/utils/base_uuid_model'
 
 export enum RequestStatus {
   PENDING = 'PENDING',
@@ -22,35 +22,35 @@ export enum RequestPriority {
 
 export default class MedicationRequest extends BaseUUIDModel {
   @column()
-  public departmentId!: string
+  declare departmentId: string
 
   @column()
-  public requestedById!: string
+  declare requestedById: string
 
   @column()
-  public approvedById!: string | null
+  declare approvedById: string | null
 
   @column()
-  public status!: RequestStatus
+  declare status: RequestStatus
 
   @column()
-  public priority!: RequestPriority
+  declare priority: RequestPriority
 
   @column()
-  public rejectionReason!: string | null
+  declare rejectionReason: string | null
 
   @belongsTo(() => Department)
-  public department!: BelongsTo<typeof Department>
+  declare department: BelongsTo<typeof Department>
 
   @belongsTo(() => User, { foreignKey: 'requestedById' })
-  public requestedBy!: BelongsTo<typeof User>
+  declare requestedBy: BelongsTo<typeof User>
 
   @belongsTo(() => User, { foreignKey: 'approvedById' })
-  public approvedBy!: BelongsTo<typeof User>
+  declare approvedBy: BelongsTo<typeof User>
 
   @hasMany(() => MedicationRequestItem)
-  public items!: HasMany<typeof MedicationRequestItem>
+  declare items: HasMany<typeof MedicationRequestItem>
 
   @belongsTo(() => Dispensation)
-  public dispensation!: BelongsTo<typeof Dispensation>
+  declare dispensation: BelongsTo<typeof Dispensation>
 }

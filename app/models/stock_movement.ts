@@ -1,9 +1,9 @@
 import { column, belongsTo } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import StockItem from './stock_item.js'
-import User from './user.js'
-import Dispensation from './dispensation.js'
-import BaseUUIDModel from './base_uuid_model.js'
+import StockItem from '#models/stock_item'
+import User from '#models/user'
+import Dispensation from '#models/dispensation'
+import BaseUUIDModel from '#models/utils/base_uuid_model'
 
 export enum MovementType {
   IN = 'IN',
@@ -15,29 +15,29 @@ export enum MovementType {
 
 export default class StockMovement extends BaseUUIDModel {
   @column()
-  public stockItemId!: string
+  declare stockItemId: string
 
   @column()
-  public type!: MovementType
+  declare type: MovementType
 
   @column()
-  public quantity!: number
+  declare quantity: number
 
   @column()
-  public reason!: string | null
+  declare reason: string | null
 
   @column()
-  public userId!: string
+  declare userId: string
 
   @column()
-  public dispensationId!: string | null
+  declare dispensationId: string | null
 
   @belongsTo(() => StockItem)
-  public stockItem!: BelongsTo<typeof StockItem>
+  declare stockItem: BelongsTo<typeof StockItem>
 
   @belongsTo(() => User)
-  public user!: BelongsTo<typeof User>
+  declare user: BelongsTo<typeof User>
 
   @belongsTo(() => Dispensation)
-  public dispensation!: BelongsTo<typeof Dispensation>
+  declare dispensation: BelongsTo<typeof Dispensation>
 }

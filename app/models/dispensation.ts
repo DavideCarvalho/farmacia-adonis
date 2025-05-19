@@ -1,34 +1,34 @@
 import { column, belongsTo, hasMany } from '@adonisjs/lucid/orm'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
-import Department from './department.js'
-import MedicationRequest from './medication_request.js'
-import User from './user.js'
-import DispensationItem from './dispensation_item.js'
-import StockMovement from './stock_movement.js'
-import BaseUUIDModel from './base_uuid_model.js'
+import Department from '#models/department'
+import MedicationRequest from '#models/medication_request'
+import User from '#models/user'
+import DispensationItem from '#models/dispensation_item'
+import StockMovement from '#models/stock_movement'
+import BaseUUIDModel from '#models/utils/base_uuid_model'
 
 export default class Dispensation extends BaseUUIDModel {
   @column()
-  public departmentId!: string
+  declare departmentId: string
 
   @column()
-  public requestId!: string | null
+  declare requestId: string | null
 
   @column()
-  public dispensedById!: string
+  declare dispensedById: string
 
   @belongsTo(() => Department)
-  public department!: BelongsTo<typeof Department>
+  declare department: BelongsTo<typeof Department>
 
   @belongsTo(() => MedicationRequest)
-  public request!: BelongsTo<typeof MedicationRequest>
+  declare request: BelongsTo<typeof MedicationRequest>
 
   @belongsTo(() => User)
-  public dispensedBy!: BelongsTo<typeof User>
+  declare dispensedBy: BelongsTo<typeof User>
 
   @hasMany(() => DispensationItem)
-  public items!: HasMany<typeof DispensationItem>
+  declare items: HasMany<typeof DispensationItem>
 
   @hasMany(() => StockMovement)
-  public stockMovements!: HasMany<typeof StockMovement>
+  declare stockMovements: HasMany<typeof StockMovement>
 }

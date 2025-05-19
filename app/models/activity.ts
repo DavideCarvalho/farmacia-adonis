@@ -1,7 +1,7 @@
 import { column, belongsTo } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import User from './user.js'
-import BaseUUIDModel from './base_uuid_model.js'
+import User from '#models/user'
+import BaseUUIDModel from '#models/utils/base_uuid_model'
 
 export enum ActivityType {
   LOGIN = 'LOGIN',
@@ -18,17 +18,17 @@ export enum ActivityType {
 
 export default class Activity extends BaseUUIDModel {
   @column()
-  public userId!: string
+  declare userId: string
 
   @column()
-  public type!: ActivityType
+  declare type: ActivityType
 
   @column()
-  public description!: string
+  declare description: string
 
   @column()
-  public metadata!: Record<string, unknown> | null
+  declare metadata: Record<string, unknown> | null
 
   @belongsTo(() => User)
-  public user!: BelongsTo<typeof User>
+  declare user: BelongsTo<typeof User>
 }

@@ -1,27 +1,27 @@
-import { column, hasMany } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
-import Batch from './batch.js'
-import BaseUUIDModel from './base_uuid_model.js'
+import Batch from '#models/batch'
+import BaseUUIDModel from '#models/utils/base_uuid_model'
 
-export default class Supplier extends BaseUUIDModel {
+export default class Supplier extends BaseModel {
   @column()
-  public name!: string
-
-  @column()
-  public cnpj!: string
+  declare name: string
 
   @column()
-  public email!: string | null
+  declare cnpj: string
 
   @column()
-  public phone!: string | null
+  declare email: string | null
 
   @column()
-  public address!: string | null
+  declare phone: string | null
 
   @column()
-  public contact!: string | null
+  declare address: string | null
+
+  @column()
+  declare contact: string | null
 
   @hasMany(() => Batch)
-  public batches!: HasMany<typeof Batch>
+  declare batches: HasMany<typeof Batch>
 }

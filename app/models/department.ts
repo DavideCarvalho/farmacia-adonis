@@ -1,23 +1,23 @@
 import { column, hasMany } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
-import User from './user.js'
-import MedicationRequest from './medication_request.js'
-import Dispensation from './dispensation.js'
-import BaseUUIDModel from './base_uuid_model.js'
+import User from '#models/user'
+import MedicationRequest from '#models/medication_request'
+import Dispensation from '#models/dispensation'
+import BaseUUIDModel from '#models/utils/base_uuid_model'
 
 export default class Department extends BaseUUIDModel {
   @column()
-  public name!: string
+  declare name: string
 
   @column()
-  public description!: string | null
+  declare description: string | null
 
   @hasMany(() => User)
-  public users!: HasMany<typeof User>
+  declare users: HasMany<typeof User>
 
   @hasMany(() => MedicationRequest)
-  public requests!: HasMany<typeof MedicationRequest>
+  declare requests: HasMany<typeof MedicationRequest>
 
   @hasMany(() => Dispensation)
-  public dispensations!: HasMany<typeof Dispensation>
+  declare dispensations: HasMany<typeof Dispensation>
 }

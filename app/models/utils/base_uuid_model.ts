@@ -1,4 +1,4 @@
-import User from './user.js'
+import User from '#models/user'
 import { BaseModel, beforeCreate, belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import type { DateTime } from 'luxon'

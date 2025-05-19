@@ -1,5 +1,5 @@
 import { BaseModelDto } from '@adocasts.com/dto/base'
-import Supplier from '#models/supplier'
+import type Supplier from '#models/supplier'
 import BatchDto from '#dtos/batch'
 
 export default class SupplierDto extends BaseModelDto {
@@ -15,12 +15,12 @@ export default class SupplierDto extends BaseModelDto {
     super()
 
     if (!supplier) return
-    this.name! = supplier.name!
-    this.cnpj! = supplier.cnpj!
-    this.email! = supplier.email!
-    this.phone! = supplier.phone!
-    this.address! = supplier.address!
-    this.contact! = supplier.contact!
-    this.batches! = BatchDto.fromArray(supplier.batches!)
+    this.name = supplier.name
+    this.cnpj = supplier.cnpj
+    this.email = supplier.email
+    this.phone = supplier.phone
+    this.address = supplier.address
+    this.contact = supplier.contact
+    this.batches = BatchDto.fromArray(supplier.batches)
   }
 }

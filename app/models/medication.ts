@@ -1,10 +1,10 @@
 import { column, hasMany } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
-import Batch from './batch.js'
-import StockItem from './stock_item.js'
-import DispensationItem from './dispensation_item.js'
-import MedicationRequestItem from './medication_request_item.js'
-import BaseUUIDModel from './base_uuid_model.js'
+import Batch from '#models/batch'
+import StockItem from '#models/stock_item'
+import DispensationItem from '#models/dispensation_item'
+import MedicationRequestItem from '#models/medication_request_item'
+import BaseUUIDModel from '#models/utils/base_uuid_model'
 
 export enum MedicationForm {
   COMPRIMIDO = 'COMPRIMIDO',
@@ -21,47 +21,47 @@ export enum MedicationForm {
 
 export default class Medication extends BaseUUIDModel {
   @column()
-  public name!: string
+  declare name: string
 
   @column()
-  public genericName!: string | null
+  declare genericName: string | null
 
   @column()
-  public description!: string | null
+  declare description: string | null
 
   @column()
-  public dosage!: string
+  declare dosage: string
 
   @column()
-  public form!: MedicationForm
+  declare form: MedicationForm
 
   @column()
-  public category!: string | null
+  declare category: string | null
 
   @column()
-  public minStock!: number
+  declare minStock: number
 
   @column()
-  public maxStock!: number | null
+  declare maxStock: number | null
 
   @column()
-  public controlled!: boolean
+  declare controlled: boolean
 
   @column()
-  public refrigerated!: boolean
+  declare refrigerated: boolean
 
   @column()
-  public barcode!: string | null
+  declare barcode: string | null
 
   @hasMany(() => Batch)
-  public batches!: HasMany<typeof Batch>
+  declare batches: HasMany<typeof Batch>
 
   @hasMany(() => StockItem)
-  public stockItems!: HasMany<typeof StockItem>
+  declare stockItems: HasMany<typeof StockItem>
 
   @hasMany(() => DispensationItem)
-  public dispensationItems!: HasMany<typeof DispensationItem>
+  declare dispensationItems: HasMany<typeof DispensationItem>
 
   @hasMany(() => MedicationRequestItem)
-  public requestItems!: HasMany<typeof MedicationRequestItem>
+  declare requestItems: HasMany<typeof MedicationRequestItem>
 }

@@ -1,29 +1,29 @@
 import { column, belongsTo } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import Dispensation from './dispensation.js'
-import Medication from './medication.js'
-import StockItem from './stock_item.js'
-import BaseUUIDModel from './base_uuid_model.js'
+import Dispensation from '#models/dispensation'
+import Medication from '#models/medication'
+import StockItem from '#models/stock_item'
+import BaseUUIDModel from '#models/utils/base_uuid_model'
 
 export default class DispensationItem extends BaseUUIDModel {
   @column()
-  public dispensationId!: string
+  declare dispensationId: string
 
   @column()
-  public medicationId!: string
+  declare medicationId: string
 
   @column()
-  public stockItemId!: string
+  declare stockItemId: string
 
   @column()
-  public quantity!: number
+  declare quantity: number
 
   @belongsTo(() => Dispensation)
-  public dispensation!: BelongsTo<typeof Dispensation>
+  declare dispensation: BelongsTo<typeof Dispensation>
 
   @belongsTo(() => Medication)
-  public medication!: BelongsTo<typeof Medication>
+  declare medication: BelongsTo<typeof Medication>
 
   @belongsTo(() => StockItem)
-  public stockItem!: BelongsTo<typeof StockItem>
+  declare stockItem: BelongsTo<typeof StockItem>
 }
