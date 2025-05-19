@@ -4,7 +4,7 @@ import Department from './department.js'
 import User from './user.js'
 import MedicationRequestItem from './medication_request_item.js'
 import Dispensation from './dispensation.js'
-import BaseUUIDModel from './utils/base_uuid_model.js'
+import BaseUUIDModel from './base_uuid_model.js'
 
 export enum RequestStatus {
   PENDING = 'PENDING',

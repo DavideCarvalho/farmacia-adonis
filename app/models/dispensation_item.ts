@@ -3,7 +3,7 @@ import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import Dispensation from './dispensation.js'
 import Medication from './medication.js'
 import StockItem from './stock_item.js'
-import BaseUUIDModel from './utils/base_uuid_model.js'
+import BaseUUIDModel from './base_uuid_model.js'
 
 export default class DispensationItem extends BaseUUIDModel {
   @column()

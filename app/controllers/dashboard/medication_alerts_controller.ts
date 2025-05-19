@@ -1,4 +1,4 @@
-import { HttpContext } from '@adonisjs/core/http'
+import type { HttpContext } from '@adonisjs/core/http'
 import StockItem from '#models/stock_item'
 import Batch from '#models/batch'
 
@@ -8,7 +8,7 @@ export default class MedicationAlertsController {
       StockItem.query()
         .preload('medication')
         .whereHas('medication', (query) => {
-          query.whereColumn('medications.minStock', '>', 'stock_items.currentQuantity')
+          query.whereColumn('medications.min_stock', '>', 'stock_items.current_quantity')
         })
         .limit(5),
       Batch.query()

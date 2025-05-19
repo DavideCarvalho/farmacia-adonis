@@ -3,7 +3,7 @@ import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import StockItem from './stock_item.js'
 import User from './user.js'
 import Dispensation from './dispensation.js'
-import BaseUUIDModel from './utils/base_uuid_model.js'
+import BaseUUIDModel from './base_uuid_model.js'
 
 export enum MovementType {
   IN = 'IN',

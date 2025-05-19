@@ -8,11 +8,11 @@ import { AlertCircle } from 'lucide-react'
 function StatsContent() {
   const { data } = useSuspenseQuery({
     queryKey: ['dashboard-stats'],
-    queryFn: () => tuyau.api.dashboard.stats.$get()
+    queryFn: () => tuyau.api.dashboard.stats.$get(),
   })
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Total de Medicamentos</CardTitle>
@@ -45,7 +45,7 @@ function StatsContent() {
           <div className="text-2xl font-bold">{data.data?.totalSales}</div>
         </CardContent>
       </Card>
-    </div>
+    </>
   )
 }
 
@@ -60,7 +60,8 @@ function ErrorFallback() {
       </CardHeader>
       <CardContent>
         <p className="text-sm text-muted-foreground">
-          Não foi possível carregar as estatísticas do dashboard. Por favor, tente novamente mais tarde.
+          Não foi possível carregar as estatísticas do dashboard. Por favor, tente novamente mais
+          tarde.
         </p>
       </CardContent>
     </Card>
@@ -70,20 +71,22 @@ function ErrorFallback() {
 export function DashboardStats() {
   return (
     <ErrorBoundary fallbackRender={ErrorFallback}>
-      <Suspense fallback={
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {[1, 2, 3, 4].map((i) => (
-            <Card key={i}>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <div className="h-4 w-32 animate-pulse rounded bg-muted" />
-              </CardHeader>
-              <CardContent>
-                <div className="h-8 w-16 animate-pulse rounded bg-muted" />
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      }>
+      <Suspense
+        fallback={
+          <>
+            {[1, 2, 3, 4].map((i) => (
+              <Card key={i}>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <div className="h-4 w-32 animate-pulse rounded bg-muted" />
+                </CardHeader>
+                <CardContent>
+                  <div className="h-8 w-16 animate-pulse rounded bg-muted" />
+                </CardContent>
+              </Card>
+            ))}
+          </>
+        }
+      >
         <StatsContent />
       </Suspense>
     </ErrorBoundary>

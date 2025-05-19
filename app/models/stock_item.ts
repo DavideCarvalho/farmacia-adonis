@@ -4,7 +4,7 @@ import Medication from './medication.js'
 import Batch from './batch.js'
 import StockMovement from './stock_movement.js'
 import DispensationItem from './dispensation_item.js'
-import BaseUUIDModel from './utils/base_uuid_model.js'
+import BaseUUIDModel from './base_uuid_model.js'
 
 export default class StockItem extends BaseUUIDModel {
   @column()

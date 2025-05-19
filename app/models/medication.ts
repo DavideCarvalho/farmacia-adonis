@@ -4,7 +4,7 @@ import Batch from './batch.js'
 import StockItem from './stock_item.js'
 import DispensationItem from './dispensation_item.js'
 import MedicationRequestItem from './medication_request_item.js'
-import BaseUUIDModel from './utils/base_uuid_model.js'
+import BaseUUIDModel from './base_uuid_model.js'
 
 export enum MedicationForm {
   COMPRIMIDO = 'COMPRIMIDO',

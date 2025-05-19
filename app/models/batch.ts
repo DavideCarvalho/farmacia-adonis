@@ -4,7 +4,7 @@ import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import Medication from './medication.js'
 import Supplier from './supplier.js'
 import StockItem from './stock_item.js'
-import BaseUUIDModel from './utils/base_uuid_model.js'
+import BaseUUIDModel from './base_uuid_model.js'
 
 export default class Batch extends BaseUUIDModel {
   @column()
