@@ -10,6 +10,7 @@ import Activity from './activity.js'
 import MedicationRequest from './medication_request.js'
 import Dispensation from './dispensation.js'
 import StockMovement from './stock_movement.js'
+import Supplier from '#models/supplier'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -72,6 +73,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @hasMany(() => StockMovement)
   declare stockMovements: HasMany<typeof StockMovement>
+
+  @hasMany(() => Supplier)
+  declare suppliers: HasMany<typeof Supplier>
 
   @beforeCreate()
   public static beforeCreate(model: User) {

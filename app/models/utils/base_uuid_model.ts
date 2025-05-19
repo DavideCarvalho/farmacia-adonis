@@ -22,11 +22,11 @@ export default class BaseUUIDModel extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  @belongsTo(() => User)
-  declare createdBy: BelongsTo<typeof User>
+  // @belongsTo(() => User)
+  // declare createdBy: BelongsTo<typeof User>
 
-  @belongsTo(() => User)
-  declare updatedBy: BelongsTo<typeof User>
+  // @belongsTo(() => User)
+  // declare updatedBy: BelongsTo<typeof User>
 
   @beforeCreate()
   public static beforeCreate(model: BaseUUIDModel) {
