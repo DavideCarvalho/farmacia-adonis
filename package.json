@@ -103,6 +103,7 @@
     "@tanstack/react-query": "^5.76.1",
     "@tuyau/client": "^0.2.7",
     "@tuyau/core": "^0.4.0",
+    "@tuyau/superjson": "^0.0.2",
     "@vinejs/vine": "^3.0.1",
     "adonis-sail": "^1.0.0",
     "adonisjs-scheduler": "2.4.0",
