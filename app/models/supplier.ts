@@ -4,17 +4,18 @@ import Batch from '#models/batch'
 import { v7 } from 'uuid'
 import type { DateTime } from 'luxon'
 import User from '#models/user'
+import BaseUUIDModel from './utils/base_uuid_model.js'
 
 /*
  * If Supplier extends from BaseUUIDModel, we get "Cannot access 'BaseUUIDModel' before initialization"error.
  * We don't know why and how to fix it.
  * So we're using BaseModel instead and basically copying the BaseUUIDModel code.
  */
-export default class Supplier extends BaseModel {
+export default class Supplier extends BaseUUIDModel {
   public static selfAssignPrimaryKey = true
 
-  @column({ isPrimary: true })
-  declare id: string
+  // @column({ isPrimary: true })
+  // declare id: string
 
   @column()
   declare name: string
@@ -43,20 +44,20 @@ export default class Supplier extends BaseModel {
   @column()
   declare updatedById: string
 
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
+  // @column.dateTime({ autoCreate: true })
+  // declare createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
+  // @column.dateTime({ autoCreate: true, autoUpdate: true })
+  // declare updatedAt: DateTime
 
-  @belongsTo(() => User)
-  declare createdBy: BelongsTo<typeof User>
+  // @belongsTo(() => User)
+  // declare createdBy: BelongsTo<typeof User>
 
-  @belongsTo(() => User)
-  declare updatedBy: BelongsTo<typeof User>
+  // @belongsTo(() => User)
+  // declare updatedBy: BelongsTo<typeof User>
 
-  @beforeCreate()
-  public static beforeCreate(model: Supplier) {
-    model.id = v7()
-  }
+  // @beforeCreate()
+  // public static beforeCreate(model: Supplier) {
+  //   model.id = v7()
+  // }
 }

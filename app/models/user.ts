@@ -5,11 +5,11 @@ import { BaseModel, beforeCreate, belongsTo, column, hasMany } from '@adonisjs/l
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { v7 } from 'uuid'
-import Department from './department.js'
-import Activity from './activity.js'
-import MedicationRequest from './medication_request.js'
-import Dispensation from './dispensation.js'
-import StockMovement from './stock_movement.js'
+import Department from '#models/department'
+import Activity from '#models/activity'
+import MedicationRequest from '#models/medication_request'
+import Dispensation from '#models/dispensation'
+import StockMovement from '#models/stock_movement'
 import Supplier from '#models/supplier'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
