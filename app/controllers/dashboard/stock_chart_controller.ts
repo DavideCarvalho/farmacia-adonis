@@ -7,7 +7,7 @@ export default class StockChartController {
       .from('stock_items')
       .select(
         db.raw("DATE_TRUNC('month', created_at) as month"),
-        db.raw('SUM(current_quantity) as total_quantity')
+        db.raw('SUM(quantity) as total_quantity')
       )
       .groupBy('month')
       .orderBy('month', 'desc')

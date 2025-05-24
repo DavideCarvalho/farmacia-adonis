@@ -11,6 +11,9 @@ import MedicationRequest from '#models/medication_request'
 import Dispensation from '#models/dispensation'
 import StockMovement from '#models/stock_movement'
 import Supplier from '#models/supplier'
+import { withUUID } from '#models/utils/with_uuid'
+import { withTimestamps } from '#models/utils/with_timestamps'
+import { withUserTracking } from '#models/utils/with_user_tracking'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -25,7 +28,12 @@ export enum UserRole {
   DEPARTMENT_USER = 'DEPARTMENT_USER',
 }
 
-export default class User extends compose(BaseModel, AuthFinder) {
+export default class User extends compose(
+  BaseModel,
+  withUUID(),
+  withTimestamps(),
+  withUserTracking()
+) {
   @column({ isPrimary: true })
   declare id: string
 

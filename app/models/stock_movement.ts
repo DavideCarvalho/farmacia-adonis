@@ -1,9 +1,12 @@
-import { column, belongsTo } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import StockItem from '#models/stock_item'
 import User from '#models/user'
 import Dispensation from '#models/dispensation'
-import BaseUUIDModel from '#models/utils/base_uuid_model'
+import { withUUID } from '#models/utils/with_uuid'
+import { withTimestamps } from '#models/utils/with_timestamps'
+import { withUserTracking } from '#models/utils/with_user_tracking'
+import { compose } from '@adonisjs/core/helpers'
 
 export enum MovementType {
   IN = 'IN',
@@ -13,7 +16,12 @@ export enum MovementType {
   DISPOSAL = 'DISPOSAL',
 }
 
-export default class StockMovement extends BaseUUIDModel {
+export default class StockMovement extends compose(
+  BaseModel,
+  withUUID(),
+  withTimestamps(),
+  withUserTracking()
+) {
   @column()
   declare stockItemId: string
 

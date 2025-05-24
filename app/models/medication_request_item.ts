@@ -1,12 +1,20 @@
-import { column, belongsTo } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import MedicationRequest from '#models/medication_request'
 import Medication from '#models/medication'
-import BaseUUIDModel from '#models/utils/base_uuid_model'
+import { withUUID } from '#models/utils/with_uuid'
+import { withTimestamps } from '#models/utils/with_timestamps'
+import { withUserTracking } from '#models/utils/with_user_tracking'
+import { compose } from '@adonisjs/core/helpers'
 
-export default class MedicationRequestItem extends BaseUUIDModel {
+export default class MedicationRequestItem extends compose(
+  BaseModel,
+  withUUID(),
+  withTimestamps(),
+  withUserTracking()
+) {
   @column()
-  declare requestId: string
+  declare medicationRequestId: string
 
   @column()
   declare medicationId: string

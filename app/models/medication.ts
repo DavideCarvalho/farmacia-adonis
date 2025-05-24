@@ -1,10 +1,14 @@
-import { column, hasMany } from '@adonisjs/lucid/orm'
-import type { HasMany } from '@adonisjs/lucid/types/relations'
+import { BaseModel, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
+import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
+import Department from '#models/department'
 import Batch from '#models/batch'
 import StockItem from '#models/stock_item'
 import DispensationItem from '#models/dispensation_item'
 import MedicationRequestItem from '#models/medication_request_item'
-import BaseUUIDModel from '#models/utils/base_uuid_model'
+import { withUUID } from '#models/utils/with_uuid'
+import { withTimestamps } from '#models/utils/with_timestamps'
+import { withUserTracking } from '#models/utils/with_user_tracking'
+import { compose } from '@adonisjs/core/helpers'
 
 export enum MedicationForm {
   COMPRIMIDO = 'COMPRIMIDO',
@@ -19,7 +23,12 @@ export enum MedicationForm {
   OUTRO = 'OUTRO',
 }
 
-export default class Medication extends BaseUUIDModel {
+export default class Medication extends compose(
+  BaseModel,
+  withUUID(),
+  withTimestamps(),
+  withUserTracking()
+) {
   @column()
   declare name: string
 

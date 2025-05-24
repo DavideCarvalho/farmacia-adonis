@@ -18,7 +18,7 @@ export default class extends BaseSchema {
         .references('id')
         .inTable('suppliers')
         .onDelete('CASCADE')
-      table.string('batch_number').notNullable()
+      table.string('number').notNullable()
       table.date('manufacturing_date').notNullable()
       table.date('expiration_date').notNullable()
       table.integer('quantity').notNullable()
@@ -29,7 +29,7 @@ export default class extends BaseSchema {
       table.uuid('created_by').nullable()
       table.uuid('updated_by').nullable()
 
-      table.unique(['medication_id', 'batch_number'])
+      table.unique(['medication_id', 'number'])
     })
   }
 

@@ -7,18 +7,6 @@
 import type { MakeTuyauRequest, MakeNonSerializedTuyauResponse } from '@tuyau/utils/types'
 import type { InferInput } from '@vinejs/vine/types'
 
-type ApiLoginPost = {
-  request: unknown
-  response: MakeNonSerializedTuyauResponse<import('../app/controllers/login_controller.ts').default['login'], false>
-}
-type ApiLogoutPost = {
-  request: unknown
-  response: MakeNonSerializedTuyauResponse<import('../app/controllers/login_controller.ts').default['logout'], false>
-}
-type ApiUsersPost = {
-  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/user.ts')['createUserValidator']>>
-  response: MakeNonSerializedTuyauResponse<import('../app/controllers/users_controller.ts').default['createUser'], true>
-}
 type ApiDashboardStatsGetHead = {
   request: unknown
   response: MakeNonSerializedTuyauResponse<import('../app/controllers/dashboard/stats_controller.ts').default['handle'], false>
@@ -43,27 +31,8 @@ type ApiDashboardRecentactivityGetHead = {
   request: unknown
   response: MakeNonSerializedTuyauResponse<import('../app/controllers/dashboard/recent_activity_controller.ts').default['handle'], false>
 }
-type HealthGetHead = {
-  request: unknown
-  response: MakeNonSerializedTuyauResponse<import('../app/controllers/health_checks_controller.ts').default['handle'], false>
-}
 export interface ApiDefinition {
   'api': {
-    'login': {
-      '$url': {
-      };
-      '$post': ApiLoginPost;
-    };
-    'logout': {
-      '$url': {
-      };
-      '$post': ApiLogoutPost;
-    };
-    'users': {
-      '$url': {
-      };
-      '$post': ApiUsersPost;
-    };
     'dashboard': {
       'stats': {
         '$url': {
@@ -103,34 +72,28 @@ export interface ApiDefinition {
       };
     };
   };
-  'health': {
-    '$url': {
-    };
-    '$get': HealthGetHead;
-    '$head': HealthGetHead;
-  };
 }
 const routes = [
   {
     params: [],
-    name: 'api.login',
-    path: '/api/login',
-    method: ["POST"],
-    types: {} as ApiLoginPost,
+    name: 'web.login',
+    path: '/',
+    method: ["GET","HEAD"],
+    types: {} as unknown,
   },
   {
     params: [],
-    name: 'api.logout',
-    path: '/api/logout',
-    method: ["POST"],
-    types: {} as ApiLogoutPost,
+    name: 'web.forgotPassword',
+    path: '/esqueci-minha-senha',
+    method: ["GET","HEAD"],
+    types: {} as unknown,
   },
   {
     params: [],
-    name: 'api.users.createUser',
-    path: '/api/users',
-    method: ["POST"],
-    types: {} as ApiUsersPost,
+    name: 'web.dashboard',
+    path: '/dashboard',
+    method: ["GET","HEAD"],
+    types: {} as unknown,
   },
   {
     params: [],
@@ -173,13 +136,6 @@ const routes = [
     path: '/api/dashboard/recent-activity',
     method: ["GET","HEAD"],
     types: {} as ApiDashboardRecentactivityGetHead,
-  },
-  {
-    params: [],
-    name: 'forgotPassword',
-    path: '/esqueci-minha-senha',
-    method: ["GET","HEAD"],
-    types: {} as unknown,
   },
 ] as const;
 export const api = {

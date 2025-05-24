@@ -17,7 +17,7 @@ export default function DashboardPage() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <DashboardStats />
       </div>
-      {/* <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
         <div className="col-span-4">
           <StockChart />
         </div>
@@ -34,8 +34,8 @@ export default function DashboardPage() {
         </div>
       </div>
       <div className="grid gap-4">
-        <RecentActivity />
-      </div> */}
+        {/* <RecentActivity /> */}
+      </div>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { HttpContext } from '@adonisjs/core/http'
+import type { HttpContext } from '@adonisjs/core/http'
 import MedicationRequestItem from '#models/medication_request_item'
 import StockItem from '#models/stock_item'
 import db from '@adonisjs/lucid/services/db'
@@ -20,8 +20,9 @@ export default class TopMedicationsController {
     const medicationsWithStock = await Promise.all(
       topMedications.map(async (med) => {
         const stockItem = await StockItem.query()
-          .where('medicationId', med.id)
-          .sum('currentQuantity as total_stock')
+          .join('batches', 'batches.id', 'stock_items.batch_id')
+          .where('batches.medication_id', med.id)
+          .sum('stock_items.quantity as total_stock')
           .first()
 
         const lastRequest = await MedicationRequestItem.query()

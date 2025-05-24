@@ -1,13 +1,21 @@
-import { column, belongsTo, hasMany } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
-import Department from '#models/department'
-import MedicationRequest from '#models/medication_request'
 import User from '#models/user'
+import Department from '#models/department'
 import DispensationItem from '#models/dispensation_item'
+import { withUUID } from '#models/utils/with_uuid'
+import { withTimestamps } from '#models/utils/with_timestamps'
+import { withUserTracking } from '#models/utils/with_user_tracking'
+import { compose } from '@adonisjs/core/helpers'
+import MedicationRequest from '#models/medication_request'
 import StockMovement from '#models/stock_movement'
-import BaseUUIDModel from '#models/utils/base_uuid_model'
 
-export default class Dispensation extends BaseUUIDModel {
+export default class Dispensation extends compose(
+  BaseModel,
+  withUUID(),
+  withTimestamps(),
+  withUserTracking()
+) {
   @column()
   declare departmentId: string
 

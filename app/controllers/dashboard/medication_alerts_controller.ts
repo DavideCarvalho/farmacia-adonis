@@ -6,9 +6,13 @@ export default class MedicationAlertsController {
   async handle({ response }: HttpContext) {
     const [lowStockItems, expiringBatches] = await Promise.all([
       StockItem.query()
-        .preload('medication')
-        .whereHas('medication', (query) => {
-          query.whereColumn('medications.min_stock', '>', 'stock_items.current_quantity')
+        .preload('batch', (query) => {
+          query.preload('medication')
+        })
+        .whereHas('batch', (query) => {
+          query.whereHas('medication', (medQuery) => {
+            medQuery.whereColumn('medications.min_stock', '>', 'stock_items.quantity')
+          })
         })
         .limit(5),
       Batch.query()
@@ -21,9 +25,9 @@ export default class MedicationAlertsController {
     const alerts = [
       ...lowStockItems.map((item) => ({
         id: item.id,
-        medication: item.medication.name,
+        medication: item.batch.medication.name,
         type: 'low_stock',
-        message: `Estoque baixo - apenas ${item.currentQuantity} unidades restantes`,
+        message: `Estoque baixo - apenas ${item.quantity} unidades restantes`,
         createdAt: item.createdAt,
       })),
       ...expiringBatches.map((batch) => ({

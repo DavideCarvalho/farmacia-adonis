@@ -1,7 +1,10 @@
-import { column, belongsTo } from '@adonisjs/lucid/orm'
-import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import User from '#models/user'
-import BaseUUIDModel from '#models/utils/base_uuid_model'
+import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import { withUUID } from '#models/utils/with_uuid'
+import { withTimestamps } from '#models/utils/with_timestamps'
+import { withUserTracking } from '#models/utils/with_user_tracking'
+import { compose } from '@adonisjs/core/helpers'
 
 export enum ActivityType {
   LOGIN = 'LOGIN',
@@ -16,7 +19,12 @@ export enum ActivityType {
   SYSTEM = 'SYSTEM',
 }
 
-export default class Activity extends BaseUUIDModel {
+export default class Activity extends compose(
+  BaseModel,
+  withUUID(),
+  withTimestamps(),
+  withUserTracking()
+) {
   @column()
   declare userId: string
 

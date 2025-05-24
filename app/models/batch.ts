@@ -1,12 +1,20 @@
 import type { DateTime } from 'luxon'
-import { column, belongsTo, hasMany } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import Medication from '#models/medication'
 import Supplier from '#models/supplier'
 import StockItem from '#models/stock_item'
-import BaseUUIDModel from '#models/utils/base_uuid_model'
+import { withUUID } from '#models/utils/with_uuid'
+import { withTimestamps } from '#models/utils/with_timestamps'
+import { withUserTracking } from '#models/utils/with_user_tracking'
+import { compose } from '@adonisjs/core/helpers'
 
-export default class Batch extends BaseUUIDModel {
+export default class Batch extends compose(
+  BaseModel,
+  withUUID(),
+  withTimestamps(),
+  withUserTracking()
+) {
   @column()
   declare number: string
 
@@ -26,7 +34,10 @@ export default class Batch extends BaseUUIDModel {
   declare quantity: number
 
   @column()
-  declare purchasePrice: number
+  declare unitPrice: number
+
+  @column()
+  declare active: boolean
 
   @belongsTo(() => Medication)
   declare medication: BelongsTo<typeof Medication>

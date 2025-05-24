@@ -18,6 +18,11 @@ export default class extends BaseSchema {
         .enum('status', ['PENDING', 'APPROVED', 'REJECTED', 'DISPENSED'])
         .notNullable()
         .defaultTo('PENDING')
+      table
+        .enum('priority', ['LOW', 'MEDIUM', 'HIGH'])
+        .notNullable()
+        .defaultTo('MEDIUM')
+      table.text('rejection_reason').nullable()
       table.text('notes').nullable()
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').notNullable()
