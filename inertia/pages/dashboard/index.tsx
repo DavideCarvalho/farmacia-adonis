@@ -34,7 +34,7 @@ export default function DashboardPage() {
         </div>
       </div>
       <div className="grid gap-4">
-        {/* <RecentActivity /> */}
+        <RecentActivity />
       </div>
     </>
   )
