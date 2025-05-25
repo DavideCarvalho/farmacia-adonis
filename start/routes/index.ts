@@ -1,2 +1,5 @@
 import './web/web.js'
 import './api/dashboard.js'
+import './api/prescriptions.js'
+import './api/notifications.js'
+import './api/patients.js'

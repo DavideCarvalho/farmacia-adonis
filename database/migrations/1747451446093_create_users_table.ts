@@ -16,6 +16,8 @@ export default class extends BaseSchema {
           'PHARMACIST_MANAGER',
           'TECHNICIAN',
           'DEPARTMENT_USER',
+          'PATIENT',
+          'DOCTOR',
         ])
         .notNullable()
       table.uuid('department_id').references('id').inTable('departments').onDelete('SET NULL')

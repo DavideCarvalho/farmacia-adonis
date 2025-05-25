@@ -1,8 +1,8 @@
 import type { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, beforeCreate, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
-import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
+import { BaseModel, beforeCreate, belongsTo, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
+import type { BelongsTo, HasMany, HasOne } from '@adonisjs/lucid/types/relations'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { v7 } from 'uuid'
 import Department from '#models/department'
@@ -14,6 +14,8 @@ import Supplier from '#models/supplier'
 import { withUUID } from '#models/utils/with_uuid'
 import { withTimestamps } from '#models/utils/with_timestamps'
 import { withUserTracking } from '#models/utils/with_user_tracking'
+import Notification from '#models/notification'
+import Patient from '#models/patient'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -26,6 +28,8 @@ export enum UserRole {
   PHARMACIST_MANAGER = 'PHARMACIST_MANAGER',
   TECHNICIAN = 'TECHNICIAN',
   DEPARTMENT_USER = 'DEPARTMENT_USER',
+  PATIENT = 'PATIENT',
+  DOCTOR = 'DOCTOR',
 }
 
 export default class User extends compose(
@@ -34,9 +38,6 @@ export default class User extends compose(
   withTimestamps(),
   withUserTracking()
 ) {
-  @column({ isPrimary: true })
-  declare id: string
-
   @column()
   declare fullName: string | null
 
@@ -52,17 +53,8 @@ export default class User extends compose(
   @column()
   declare departmentId: string | null
 
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime | null
-
-  @belongsTo(() => User)
-  declare createdBy: BelongsTo<typeof User>
-
-  @belongsTo(() => User)
-  declare updatedBy: BelongsTo<typeof User>
+  @column()
+  declare active: boolean
 
   @belongsTo(() => Department)
   declare department: BelongsTo<typeof Department>
@@ -85,8 +77,18 @@ export default class User extends compose(
   @hasMany(() => Supplier)
   declare suppliers: HasMany<typeof Supplier>
 
-  @beforeCreate()
-  public static beforeCreate(model: User) {
-    model.id = v7()
-  }
+  @hasMany(() => Notification, {
+    foreignKey: 'pharmacistId',
+  })
+  declare notifications: HasMany<typeof Notification>
+
+  @hasMany(() => User, {
+    foreignKey: 'doctorId',
+  })
+  declare pharmacists: HasMany<typeof User>
+
+  @hasOne(() => Patient, {
+    foreignKey: 'userId',
+  })
+  declare patient: HasOne<typeof Patient>
 }

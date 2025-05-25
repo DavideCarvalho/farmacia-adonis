@@ -18,6 +18,12 @@ export default class extends BaseSchema {
         .references('id')
         .inTable('medications')
         .onDelete('CASCADE')
+      table
+        .uuid('stock_item_id')
+        .notNullable()
+        .references('id')
+        .inTable('stock_items')
+        .onDelete('CASCADE')
       table.uuid('batch_id').notNullable().references('id').inTable('batches').onDelete('CASCADE')
       table.integer('quantity').notNullable()
       table.text('notes').nullable()

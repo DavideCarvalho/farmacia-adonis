@@ -105,6 +105,7 @@
     "@tuyau/core": "^0.4.0",
     "@tuyau/superjson": "^0.0.2",
     "@vinejs/vine": "^3.0.1",
+    "adonis-lucid-filter": "^5.2.0",
     "adonis-sail": "^1.0.0",
     "adonisjs-scheduler": "2.4.0",
     "class-variance-authority": "^0.7.1",

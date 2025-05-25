@@ -7,13 +7,29 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary()
       table
-        .uuid('medication_request_id')
+        .uuid('department_id')
+        .notNullable()
+        .references('id')
+        .inTable('departments')
+        .onDelete('CASCADE')
+      table
+        .uuid('request_id')
         .notNullable()
         .references('id')
         .inTable('medication_requests')
         .onDelete('CASCADE')
-      table.uuid('dispensed_by').notNullable().references('id').inTable('users').onDelete('CASCADE')
-      table.uuid('received_by').notNullable().references('id').inTable('users').onDelete('CASCADE')
+      table
+        .uuid('dispensed_by_id')
+        .notNullable()
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE')
+      table
+        .uuid('received_by_id')
+        .notNullable()
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE')
       table.text('notes').nullable()
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').notNullable()

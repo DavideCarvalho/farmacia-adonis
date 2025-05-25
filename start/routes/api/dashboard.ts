@@ -22,4 +22,4 @@ router
   })
   .prefix('/api/dashboard')
   .as('api.dashboard')
-  // .middleware(middleware.auth())
+// .middleware(middleware.auth())

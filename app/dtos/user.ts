@@ -1,5 +1,6 @@
 import { BaseModelDto } from '@adocasts.com/dto/base'
-import User, { UserRole } from '#models/user'
+import type User from '#models/user'
+import type { UserRole } from '#models/user'
 import DepartmentDto from '#dtos/department'
 import ActivityDto from '#dtos/activity'
 import MedicationRequestDto from '#dtos/medication_request'
@@ -13,8 +14,8 @@ export default class UserDto extends BaseModelDto {
   declare password: string
   declare role: UserRole
   declare departmentId: string | null
-  declare createdAt: string
-  declare updatedAt: string | null
+  declare createdAt: Date
+  declare updatedAt: Date | undefined
   declare createdBy: UserDto | null
   declare updatedBy: UserDto | null
   declare department: DepartmentDto | null
@@ -35,8 +36,8 @@ export default class UserDto extends BaseModelDto {
     this.password = user.password
     this.role = user.role
     this.departmentId = user.departmentId
-    this.createdAt = user.createdAt.toISO()!
-    this.updatedAt = user.updatedAt?.toISO()!
+    this.createdAt = user.createdAt.toJSDate()
+    this.updatedAt = user.updatedAt?.toJSDate()
     this.createdBy = user.createdBy && new UserDto(user.createdBy)
     this.updatedBy = user.updatedBy && new UserDto(user.updatedBy)
     this.department = user.department && new DepartmentDto(user.department)

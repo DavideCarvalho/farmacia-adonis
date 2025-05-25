@@ -47,6 +47,9 @@ export default class MedicationRequest extends compose(
   @column({ columnName: 'rejection_reason' })
   declare rejectionReason: string | null
 
+  @column()
+  declare notes: string | null
+
   @belongsTo(() => Department)
   declare department: BelongsTo<typeof Department>
 

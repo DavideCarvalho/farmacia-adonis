@@ -33,6 +33,7 @@ export default defineConfig({
     () => import('@acidiney/bull-queue/commands'),
     () => import('adonisjs-scheduler/commands'),
     () => import('@adocasts.com/dto/commands'),
+    () => import('adonis-lucid-filter/commands')
   ],
 
   /*
@@ -70,6 +71,7 @@ export default defineConfig({
       environment: ['console'],
     },
     () => import('@artian-techs/adonis-breadcrumbs/breadcrumbs_provider'),
+    () => import('adonis-lucid-filter/provider')
   ],
 
   /*

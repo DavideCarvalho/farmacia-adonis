@@ -20,10 +20,13 @@ export default class Dispensation extends compose(
   declare departmentId: string
 
   @column()
-  declare requestId: string | null
+  declare requestId: string
 
   @column()
   declare dispensedById: string
+
+  @column()
+  declare receivedById: string
 
   @belongsTo(() => Department)
   declare department: BelongsTo<typeof Department>
@@ -33,6 +36,9 @@ export default class Dispensation extends compose(
 
   @belongsTo(() => User)
   declare dispensedBy: BelongsTo<typeof User>
+
+  @belongsTo(() => User)
+  declare receivedBy: BelongsTo<typeof User>
 
   @hasMany(() => DispensationItem)
   declare items: HasMany<typeof DispensationItem>

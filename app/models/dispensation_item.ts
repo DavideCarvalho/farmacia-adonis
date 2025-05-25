@@ -26,6 +26,9 @@ export default class DispensationItem extends compose(
   @column()
   declare quantity: number
 
+  @column()
+  declare batchId: string
+
   @belongsTo(() => Dispensation)
   declare dispensation: BelongsTo<typeof Dispensation>
 

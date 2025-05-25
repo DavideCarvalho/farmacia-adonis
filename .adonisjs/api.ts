@@ -31,6 +31,38 @@ type ApiDashboardRecentactivityGetHead = {
   request: unknown
   response: MakeNonSerializedTuyauResponse<import('../app/controllers/dashboard/recent_activity_controller.ts').default['handle'], false>
 }
+type ApiPrescriptionsGetHead = {
+  request: unknown
+  response: MakeNonSerializedTuyauResponse<import('../app/controllers/prescriptions/list_prescriptions_controller.ts').default['handle'], false>
+}
+type ApiPrescriptionsPost = {
+  request: unknown
+  response: MakeNonSerializedTuyauResponse<import('../app/controllers/prescriptions/create_prescription_controller.ts').default['handle'], false>
+}
+type ApiPrescriptionsIdGetHead = {
+  request: unknown
+  response: MakeNonSerializedTuyauResponse<import('../app/controllers/prescriptions/show_prescription_controller.ts').default['handle'], false>
+}
+type ApiPrescriptionsIdReviewPost = {
+  request: unknown
+  response: MakeNonSerializedTuyauResponse<import('../app/controllers/prescriptions/review_prescription_controller.ts').default['handle'], false>
+}
+type ApiNotificationsGetHead = {
+  request: unknown
+  response: MakeNonSerializedTuyauResponse<import('../app/controllers/notifications/list_notifications_controller.ts').default['handle'], false>
+}
+type ApiNotificationsIdMarkasreadPost = {
+  request: unknown
+  response: MakeNonSerializedTuyauResponse<import('../app/controllers/notifications/mark_notification_read_controller.ts').default['handle'], false>
+}
+type ApiNotificationsMarkallasreadPost = {
+  request: unknown
+  response: MakeNonSerializedTuyauResponse<import('../app/controllers/notifications/mark_all_notifications_read_controller.ts').default['handle'], false>
+}
+type ApiPatientsGetHead = {
+  request: unknown
+  response: MakeNonSerializedTuyauResponse<import('../app/controllers/patients/list_patients_controller.ts').default['handle'], false>
+}
 export interface ApiDefinition {
   'api': {
     'dashboard': {
@@ -71,13 +103,62 @@ export interface ApiDefinition {
         '$head': ApiDashboardRecentactivityGetHead;
       };
     };
+    'prescriptions': {
+      '$url': {
+      };
+      '$get': ApiPrescriptionsGetHead;
+      '$head': ApiPrescriptionsGetHead;
+      '$post': ApiPrescriptionsPost;
+      ':id': {
+        '$url': {
+        };
+        '$get': ApiPrescriptionsIdGetHead;
+        '$head': ApiPrescriptionsIdGetHead;
+        'review': {
+          '$url': {
+          };
+          '$post': ApiPrescriptionsIdReviewPost;
+        };
+      };
+    };
+    'notifications': {
+      '$url': {
+      };
+      '$get': ApiNotificationsGetHead;
+      '$head': ApiNotificationsGetHead;
+      ':id': {
+        'mark-as-read': {
+          '$url': {
+          };
+          '$post': ApiNotificationsIdMarkasreadPost;
+        };
+      };
+      'mark-all-as-read': {
+        '$url': {
+        };
+        '$post': ApiNotificationsMarkallasreadPost;
+      };
+    };
+    'patients': {
+      '$url': {
+      };
+      '$get': ApiPatientsGetHead;
+      '$head': ApiPatientsGetHead;
+    };
   };
 }
 const routes = [
   {
     params: [],
-    name: 'web.login',
+    name: 'web.home',
     path: '/',
+    method: ["GET","HEAD"],
+    types: {} as unknown,
+  },
+  {
+    params: [],
+    name: 'web.login',
+    path: '/login',
     method: ["GET","HEAD"],
     types: {} as unknown,
   },
@@ -92,6 +173,20 @@ const routes = [
     params: [],
     name: 'web.dashboard',
     path: '/dashboard',
+    method: ["GET","HEAD"],
+    types: {} as unknown,
+  },
+  {
+    params: [],
+    name: 'web.prescriptions',
+    path: '/prescricoes',
+    method: ["GET","HEAD"],
+    types: {} as unknown,
+  },
+  {
+    params: [],
+    name: 'web.notifications',
+    path: '/notificacoes',
     method: ["GET","HEAD"],
     types: {} as unknown,
   },
@@ -136,6 +231,62 @@ const routes = [
     path: '/api/dashboard/recent-activity',
     method: ["GET","HEAD"],
     types: {} as ApiDashboardRecentactivityGetHead,
+  },
+  {
+    params: [],
+    name: 'api.prescriptions.list',
+    path: '/api/prescriptions',
+    method: ["GET","HEAD"],
+    types: {} as ApiPrescriptionsGetHead,
+  },
+  {
+    params: [],
+    name: 'api.prescriptions.create',
+    path: '/api/prescriptions',
+    method: ["POST"],
+    types: {} as ApiPrescriptionsPost,
+  },
+  {
+    params: ["id"],
+    name: 'api.prescriptions.show',
+    path: '/api/prescriptions/:id',
+    method: ["GET","HEAD"],
+    types: {} as ApiPrescriptionsIdGetHead,
+  },
+  {
+    params: ["id"],
+    name: 'api.prescriptions.review',
+    path: '/api/prescriptions/:id/review',
+    method: ["POST"],
+    types: {} as ApiPrescriptionsIdReviewPost,
+  },
+  {
+    params: [],
+    name: 'api.dashboard.list',
+    path: '/api/notifications',
+    method: ["GET","HEAD"],
+    types: {} as ApiNotificationsGetHead,
+  },
+  {
+    params: ["id"],
+    name: 'api.dashboard.markAsRead',
+    path: '/api/notifications/:id/mark-as-read',
+    method: ["POST"],
+    types: {} as ApiNotificationsIdMarkasreadPost,
+  },
+  {
+    params: [],
+    name: 'api.dashboard.markAllAsRead',
+    path: '/api/notifications/mark-all-as-read',
+    method: ["POST"],
+    types: {} as ApiNotificationsMarkallasreadPost,
+  },
+  {
+    params: [],
+    name: 'api.patients.list',
+    path: '/api/patients',
+    method: ["GET","HEAD"],
+    types: {} as ApiPatientsGetHead,
   },
 ] as const;
 export const api = {

@@ -28,7 +28,19 @@ export default class Supplier extends compose(
   declare address: string | null
 
   @column()
+  declare city: string | null
+
+  @column()
+  declare state: string | null
+
+  @column()
+  declare zipCode: string | null
+
+  @column()
   declare contact: string | null
+
+  @column()
+  declare active: boolean
 
   @hasMany(() => Batch)
   declare batches: HasMany<typeof Batch>
